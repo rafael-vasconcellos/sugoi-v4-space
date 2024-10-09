@@ -1,4 +1,5 @@
 flask
 waitress
+flask_cors
 CTranslate2
-#fairseq
+sentencepiece
