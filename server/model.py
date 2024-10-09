@@ -35,3 +35,10 @@ def translate(text: str):
     )
 
     return [''.join( detokenizeBatch(result.hypotheses[0]) ) for result in translated]
+
+
+if __name__ == "__main__":
+    translated = translate("ダンガンロンパ 希望の学園と絶望の高校生")
+    print(translated)
+
+
