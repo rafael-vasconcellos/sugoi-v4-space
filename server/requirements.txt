@@ -1,2 +1,4 @@
 flask
 waitress
+CTranslate2
+#fairseq
