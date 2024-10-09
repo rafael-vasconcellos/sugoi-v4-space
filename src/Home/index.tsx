@@ -28,7 +28,7 @@ export default function App() {
 
     return (
       <main class="w-screen my-24 mx-5">
-        <div class="w-1/2 p-3 flex justify-end">
+        <div class="w-1/2 py-4 px-2 flex justify-end">
           <button onclick={() => { 
               start(() => fetchData(textarea?.value as string))
           } }>Translate</button>
