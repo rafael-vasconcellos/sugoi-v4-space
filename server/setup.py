@@ -20,7 +20,7 @@ def convert_model():
 
 
 
-if __name__ == "__name__":
+if __name__ == "__main__":
     if "-download" in sys.argv: download_model()
     if "-convert" in sys.argv: convert_model()
 
