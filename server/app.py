@@ -1,7 +1,7 @@
 from flask import Flask, send_from_directory, json, Response, request
 from waitress import serve
 from flask_cors import CORS, cross_origin
-from server.model import SugoiTranslator
+from model import SugoiTranslator
 
 
 app = Flask(__name__)
@@ -22,9 +22,11 @@ def download_assets(filename):
 @app.route('/api/translate', methods= ['POST'])
 @cross_origin()
 def translate_api(): 
-    text = request.args.get('text')
+    input_text = request.args.get('text')
     sugoiTranslator = SugoiTranslator()
-    if isinstance(text, str) and len(text) > 0: return json.dump(sugoiTranslator.translate(text))
+    if isinstance(input_text, str) and len(input_text) > 0: 
+        text = sugoiTranslator.translate(input_text)
+        return json.dumps(text)
     return Response(status= 400)
 
 
