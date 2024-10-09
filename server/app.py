@@ -19,7 +19,7 @@ def download_file(filename):
 def download_assets(filename):
     return send_from_directory('dist/assets', filename)
 
-@app.route('api/translate', methods= ['POST'])
+@app.route('/api/translate', methods= ['POST'])
 @cross_origin()
 def translate_api(): 
     text = request.args.get('text')
