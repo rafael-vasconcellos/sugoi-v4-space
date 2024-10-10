@@ -25,7 +25,7 @@ COPY --from=builder /app/server ./
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python setup.py -download
 
-EXPOSE 8080
+EXPOSE 7860
 
 # Comando para executar o servidor Python
 CMD ["python", "app.py"]

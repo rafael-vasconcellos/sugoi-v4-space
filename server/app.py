@@ -31,6 +31,6 @@ def translate_api():
 
 
 if __name__ == '__main__':
-    serve(app)
+    serve(app, port= 7860)
 
 
