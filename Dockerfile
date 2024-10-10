@@ -12,5 +12,7 @@ WORKDIR /app
 RUN pip install --no-cache-dir -r /app/requirements.txt
 RUN python /app/setup.py -download
 
+EXPOSE 8080
 # Comando para executar o script Python
 CMD ["python", "app.py"]
+
