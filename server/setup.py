@@ -5,7 +5,7 @@ import ctranslate2
 
 def download_model():
     model_id = "JustFrederik/sugoi-v4-ja-en-ct2"
-    local_folder = snapshot_download(repo_id=model_id, local_dir="./server/model")
+    local_folder = snapshot_download(repo_id=model_id, local_dir="./model")
     print(f"Files downloaded in: {local_folder}")
 
 def convert_model():    
