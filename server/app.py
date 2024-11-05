@@ -62,7 +62,7 @@ def translate_api():
         redis_client.lpush(queue_key, input_text) # left push
         result = query_translation(input_text)
         if result is not None: return json.dumps({ "text": result })
-        else: Response(status= 500)
+        else: return Response(status= 500)
     return Response(status= 400)
 
 
