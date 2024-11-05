@@ -1,6 +1,6 @@
 from threading import Thread
 import redis, time
-from flask import Flask, send_from_directory, json, Response, request
+from flask import Flask, jsonify, send_from_directory, Response, request
 from waitress import serve
 from flask_cors import CORS, cross_origin
 from model import SugoiTranslator
@@ -20,6 +20,7 @@ def queue_process():
             else: break
 
         if len(task_list): task_process(task_list)
+        
 
 def task_process(input_text_list: List[str]):
     sugoiTranslator = SugoiTranslator()
@@ -30,10 +31,10 @@ def task_process(input_text_list: List[str]):
 def query_translation(input_text: str):
     for _ in range(30):
         translated_text = redis_client.hget(translated_key, input_text)
-        if translated_text: 
+        if translated_text is not None: 
             redis_client.hdel(translated_key, input_text)
             try: return translated_text.decode('utf-8')
-            except: return translated_text
+            except AttributeError: return translated_text
         time.sleep(1)
 
 
@@ -61,7 +62,7 @@ def translate_api():
     if isinstance(input_text, str) and len(input_text) > 0: 
         redis_client.lpush(queue_key, input_text) # left push
         result = query_translation(input_text)
-        if result is not None: return json.dumps({ "text": result })
+        if result is not None: return jsonify({ "text": result })
         else: return Response(status= 500)
     return Response(status= 400)
 
