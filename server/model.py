@@ -1,11 +1,12 @@
 import sys, os
 import ctranslate2
 import sentencepiece as spm
+from typing import Union
 
 
 
-def indexOf(list: list, value):
-    try: return list.index(value)
+def indexOf(arr: list, value):
+    try: return arr.index(value)
     except: return -1
 
 
@@ -24,13 +25,13 @@ class SugoiTranslator:
             return [sp.encode(text, out_type=str)]
 
 
-    def detokenizeBatch(self, text: str):
+    def detokenizeBatch(self, token):
         sp = spm.SentencePieceProcessor(self.sp_target_model)
-        translation = sp.decode(text)
-        return translation
+        text = sp.decode(token)
+        return text
 
 
-    def translate(self, text: str):
+    def translate(self, text: Union[str, list]):
         translated = self.translator.translate_batch(
             source= self.tokenizeBatch(text), 
             num_hypotheses= 1, 
@@ -46,10 +47,10 @@ class SugoiTranslator:
 
 
 if __name__ == "__main__":
+    global modelDir
+    modelDir = "./model"
     index = indexOf(sys.argv, "-modelDir")
-    if index != -1:
-        global modelDir
-        modelDir = sys.argv[index+1]
+    if index != -1: modelDir = sys.argv[index+1]
     
     sugoiTranslator = SugoiTranslator(modelDir)
     translated = sugoiTranslator.translate("ダンガンロンパ 希望の学園と絶望の高校生")
