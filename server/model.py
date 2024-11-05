@@ -16,7 +16,7 @@ class SugoiTranslator:
         self.sp_source_model = os.path.join(modelDir, "spm.ja.nopretok.model")
         self.sp_target_model = os.path.join(modelDir, "spm.en.nopretok.model")
         # inter_threads: quantas operações independentes podem ser executadas simultaneamente
-        self.translator = ctranslate2.Translator(modelDir, device="cpu", intra_threads=4, inter_threads=2)
+        self.translator = ctranslate2.Translator(modelDir, device="cpu", intra_threads=3, inter_threads=2)
 
     def tokenizeBatch(self, text):
         sp = spm.SentencePieceProcessor(self.sp_source_model)

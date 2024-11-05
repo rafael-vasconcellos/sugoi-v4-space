@@ -4,3 +4,4 @@ flask_cors
 huggingface_hub
 CTranslate2
 sentencepiece
+redis

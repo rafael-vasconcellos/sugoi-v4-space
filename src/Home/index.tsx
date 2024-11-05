@@ -25,7 +25,7 @@ export default function App() {
       const response = await fetch(`/api/translate?text=${text}`, { method: "POST" }).then(response => { 
           if (response.status === 200) { return response.json() }
   
-      }).then(response => response?.[0])
+      }).then(response => response?.text)
       .catch(() => null)
   
       return { originalText: text, translatedText: response }

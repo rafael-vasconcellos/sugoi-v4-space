@@ -22,10 +22,14 @@ WORKDIR /app
 # Copie o build gerado pelo Node.js para o novo estágio
 COPY --from=builder /app/server ./
 
+RUN apt-get update && apt-get install -y redis-server && apt-get clean
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python setup.py -download
 
 EXPOSE 7860
+# Porta padrão do Redis
+EXPOSE 6379
 
-# Comando para executar o servidor Python
-CMD ["python", "app.py"]
+# Comando para executar o container
+RUN chmod +x /app/start.sh
+CMD ["/app/start.sh"]
