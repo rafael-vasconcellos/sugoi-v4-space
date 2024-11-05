@@ -32,7 +32,8 @@ def query_translation(input_text: str):
         translated_text = redis_client.hget(translated_key, input_text)
         if translated_text: 
             redis_client.hdel(translated_key, input_text)
-            return translated_text
+            try: return translated_text.decode('utf-8')
+            except: return translated_text
         time.sleep(1)
 
 
@@ -60,7 +61,7 @@ def translate_api():
     if isinstance(input_text, str) and len(input_text) > 0: 
         redis_client.lpush(queue_key, input_text) # left push
         result = query_translation(input_text)
-        if result is not None: return json.dumps({ "text": str(result) })
+        if result is not None: return json.dumps({ "text": result })
         else: Response(status= 500)
     return Response(status= 400)
 
