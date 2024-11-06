@@ -1,8 +1,11 @@
 #!/bin/bash
 
-whoami
+set -e  # Para o script se algum comando falhar
+#whoami
 
-service redis-server start
-service redis-server status
+# Inicia o Redis em background
+redis-server --daemonize yes
+sleep 2
+redis-cli ping
 
 python app.py
