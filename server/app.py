@@ -20,7 +20,7 @@ def queue_process():
             else: break
 
         if len(task_list): task_process(task_list)
-        
+        time.sleep(0.5)
 
 def task_process(input_text_list: List[str]):
     sugoiTranslator = SugoiTranslator()
@@ -71,6 +71,7 @@ if __name__ == '__main__':
     Thread(target=queue_process, daemon=True).start()
     print("Starting server...")
     try: serve(app, port= 7860)
-    except: serve(app, port= 7860)
+    except BaseException as e: 
+        print(e)
 
 
