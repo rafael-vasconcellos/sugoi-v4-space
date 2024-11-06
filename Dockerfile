@@ -30,6 +30,7 @@ EXPOSE 7860
 # Porta padrão do Redis
 EXPOSE 6379
 
-# Comando para executar o container
 RUN chmod +x /app/start.sh
+# Comando para executar o container
+USER root
 CMD ["/app/start.sh"]
