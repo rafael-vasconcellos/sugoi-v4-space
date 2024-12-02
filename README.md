@@ -1,5 +1,3 @@
-# About
-
 ---
 title: Sugoi V4
 emoji: 🐳
@@ -10,6 +8,9 @@ app_port: 7860
 license: mit
 pinned: false
 ---
+<br>
+
+# About
 
 [Sugoi](https://huggingface.co/JustFrederik/sugoi-v4-ja-en-ct2) is a well-known lightweight Japanese to English translator. It can run on the average workstation, without a GPU. This space can run in a free hugging face space.
 
