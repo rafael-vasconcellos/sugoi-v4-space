@@ -22,10 +22,9 @@ export default function App() {
       const { text } = input
       if (!text || translation.loading) { return null }
       if (translation()) { mutate(null) }
-      const response = await fetch(`/api/translate?text=${text}`, { method: "POST" }).then(response => { 
-          if (response.status === 200) { return response.json() }
-  
-      }).then(response => response?.text)
+      const response = await fetch(`/api/translate?text=${text}`, { method: "POST" })
+      .then(response => response.status===200? response.json() : response.text())
+      .then(response => response?.text ?? response)
       .catch(() => null)
   
       return { originalText: text, translatedText: response }

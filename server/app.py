@@ -63,7 +63,7 @@ def translate_api():
         redis_client.lpush(queue_key, input_text) # left push
         result = query_translation(input_text)
         if result is not None: return jsonify({ "text": result })
-        else: return Response(status= 500)
+        else: return Response(status= 529, response= "Error 529: Server overloaded")
     return Response(status= 400)
 
 
