@@ -20,7 +20,7 @@ def queue_process():
             else: break
 
         if len(task_list): task_process(task_list)
-        time.sleep(0.5)
+        time.sleep(0.2)
 
 def task_process(input_text_list: List[str]):
     sugoiTranslator = SugoiTranslator()
