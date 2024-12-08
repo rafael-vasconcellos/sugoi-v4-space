@@ -49,7 +49,7 @@ def index():
 
 @app.route('/<path:filename>')
 def download_file(filename):
-    return send_from_directory('.', filename)
+    return send_from_directory('dist', filename)
 
 @app.route('/assets/<path:filename>')
 def download_assets(filename):
