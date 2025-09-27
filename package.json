@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "css:dev": "tailwindcss -i src/input.css -o output/output.css --watch",
     "build:css": "tailwindcss -i src/input.css -o output/output.css",
-    "start": "cd server && python app.py"
+    "start": "cd server && python app.py",
+    "test": "node --test"
   },
   "dependencies": {
     "solid-js": "^1.9.1"
