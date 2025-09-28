@@ -8,4 +8,4 @@ redis-server --daemonize yes --stop-writes-on-bgsave-error no
 sleep 2
 redis-cli ping
 
-python app.py
+python app_uvi.py
