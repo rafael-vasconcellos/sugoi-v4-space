@@ -24,6 +24,10 @@ app.add_middleware(
 class PostRequestBody(BaseModel):
     input_texts: List[str]
 
+class DefaultSugoiRequestBody(BaseModel):
+    message: str
+    content: List[str]
+
 app.mount("/assets", StaticFiles(directory=DIST_DIR / "assets"), name="assets")
 app.mount("/public", StaticFiles(directory=DIST_DIR / "public"), name="public")
 #app.mount("/", StaticFiles(directory=DIST_DIR, html=True), name="spa")
@@ -47,6 +51,7 @@ async def translate_get(text: str):
         else: return JSONResponse(status_code= 529, content={"error": "Server overloaded"})
     return Response(status_code= 400)
 
+
 @app.post('/api/translate')
 async def translate_post(request_body: PostRequestBody):
     if isinstance(request_body.input_texts, list) and len(request_body.input_texts):
@@ -54,6 +59,20 @@ async def translate_post(request_body: PostRequestBody):
         redis_client.lpush(queue_key, json.dumps({
             "id": task_id,
             "input": request_body.input_texts
+        })) # left push
+        result = query_translation(task_id)
+        if result is not None: return { "translations": ast.literal_eval(result) }
+        else: return JSONResponse(status_code= 529, content={"error": "Server overloaded"})
+    return Response(status_code= 400)
+
+
+@app.post('/')
+async def default_post(request_body: DefaultSugoiRequestBody):
+    if isinstance(request_body.content, list) and len(request_body.content) and request_body.message == "translate sentences":
+        task_id = str(uuid.uuid4())
+        redis_client.lpush(queue_key, json.dumps({
+            "id": task_id,
+            "input": request_body.content
         })) # left push
         result = query_translation(task_id)
         if result is not None: return { "translations": ast.literal_eval(result) }

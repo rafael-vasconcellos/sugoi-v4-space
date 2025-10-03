@@ -34,7 +34,7 @@ export default function App() {
     return (
       <main class="w-screen my-24 mx-5">
         <div class="w-1/2 py-4 px-2 flex justify-end gap-4">
-          <a class="button bg-zinc-500 hover:bg-zinc-500/60" href="/docs" target="_blank">Docs</a>
+          <a class="button bg-zinc-500 hover:bg-zinc-500/60" href="/docs" target="_blank">API Docs</a>
           <button class="bg-primary hover:bg-primary-alt" onclick={() => {
               setText({ text: textarea?.value })
           }}>Translate</button>
